@@ -50,17 +50,23 @@ router.post('/login', async(req,res,next)=>{
     }
     try {
         const foundUser = await User.findOne({username: username})
-        if(foundUser !== null){
+        if(foundUser === null){
             res.status(400).json({errorMessage: 'Usuario no existe'})
             return;
         }
-        const isPasswordValid = await bcrypt.compare(password, foundUser.password);
-        console.log('aqui', isPasswordValid)
 
+
+        const isPasswordValid = await bcrypt.compare(password, foundUser.password);
+        console.log('aqui', isPasswordValid);
+        if (isPasswordValid === false){
+            res.status(400).json({errorMessage:'Contraseña no valida'}); //no me sale
+            return;
+        }
+    res.json('probando ruta')     
     } catch (error) {
         next(error)
     }
-    res.json('probando ruta')
+   
 })
 
 
