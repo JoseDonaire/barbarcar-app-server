@@ -1,12 +1,11 @@
 const {Schema,model}=require ('mongoose');
 
 
-const travleSchema= new Schema(
+const travelSchema= new Schema(
     {
         date:{
             type: Date,
-            unique:true,
-            required:true
+            //required:true
         },
         from:{
             type:String,
@@ -22,15 +21,15 @@ const travleSchema= new Schema(
         },
         bags:{
             type:Number,
-            required:true
+            //required:true
         },
         seatsCar:{
             type:Number,
-            required:true
+           // required:true
         },
         price:{
-            type:number,
-            required:true
+            type:Number,
+           // required:true
         },
         owner:{
             type:Schema.Types.ObjectId,

@@ -1,8 +1,12 @@
 const router = require("express").Router();
 const User = require('../models/User.model');
+const bcrypt = require ('bcryptjs')
+const jwt= require('jsonwebtoken')
+
+const isVerified = require('../middlewares/isVerified')
 
 
-//POSt '/auth/signup' => recibir perfil de usuario y crearlo en la BD
+//POSt '/api/auth/signup' => recibir perfil de usuario y crearlo en la BD
 router.post('/signup', async (req,res,next)=>{
     console.log(req.body)
     const{username, email, password}= req.body
@@ -40,7 +44,7 @@ router.post('/signup', async (req,res,next)=>{
    
 })
 
-//POST 'auth/login' => validar las credenciales
+//POST '/api/auth/login' => validar las credenciales
 router.post('/login', async(req,res,next)=>{
     console.log(req.body)
     const {username,password} = req.body;
@@ -59,10 +63,22 @@ router.post('/login', async(req,res,next)=>{
         const isPasswordValid = await bcrypt.compare(password, foundUser.password);
         console.log('aqui', isPasswordValid);
         if (isPasswordValid === false){
-            res.status(400).json({errorMessage:'Contraseña no valida'}); //no me sale
+            res.status(400).json({errorMessage:'Contraseña no valida'}); 
             return;
         }
-    res.json('probando ruta')     
+
+    const payload = {
+        _id: foundUser._id,
+        email:foundUser.username
+    } 
+    const authToken = jwt.sign(
+        payload,
+        process.env.TOKEN_SECRET,
+        {algorithm: 'HS256',
+        expiresIn:'48h'
+    }
+    )
+    res.json({authToken: authToken})     
     } catch (error) {
         next(error)
     }
@@ -70,7 +86,12 @@ router.post('/login', async(req,res,next)=>{
 })
 
 
-//GET '/auth/verify' verifcar que el usuario ya ha sido validado y está activo
+//GET '/api/auth/verify' verifcar que el usuario ya ha sido validado y está activo
+router.get('/verify', isVerified, (req,res,next)=>{
+    console.log('verificando token')
+    console.log(req.payload)
+    res.json('probando ruta')
 
+})
 
 module.exports = router;
