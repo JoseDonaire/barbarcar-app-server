@@ -1,7 +1,7 @@
 
 const router = require("express").Router();
-const isVerified = require('../middlewares/isVerified')
-
+const isVerified = require('../middlewares/isVerified');
+const Travel = require('../models/Travel.model');
 
 
 //GEt '/profile'  => recibimos la info del perfil del usuario

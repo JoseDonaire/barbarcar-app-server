@@ -15,5 +15,8 @@ router.use('/travels',travelsRoutes)
 const profileRoutes = require('./profile.routes')
 router.use('/profile',profileRoutes)
 
+const reviewRoutes = require('./review.routes')
+router.use('/review',reviewRoutes)
+
 
 module.exports = router;

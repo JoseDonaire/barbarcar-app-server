@@ -29,7 +29,7 @@ router.get('/mytravels',isVerified, async(req,res,next)=>{
 router.post('/create' ,isVerified,async(req,res,next)=>{
     const{date,from,to,car,bags,seatsCar,price,navigator}=req.body
   //  if(!date ||!from ||!tocar ||!bags ||!seatsCar ||!price) {
-  //      res.json({errorMessage: '¡Nos falta sinformación sobre tu viaje!'})
+  //      res.json({errorMessage: '¡Nos falta información sobre tu viaje!'})
   //  }
     
 
@@ -77,7 +77,7 @@ router.patch('/:idTravel',isVerified, async (req,res,next)=>{
             bags:bags,
             seatsCar:seatsCar,
             price:price
-        //falta owner y navigator
+        //falta  navigator
         })
         res.json('probando')
     } catch (error) {
