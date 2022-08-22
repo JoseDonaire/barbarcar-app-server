@@ -35,15 +35,14 @@ router.post('/create' ,isVerified,async(req,res,next)=>{
 
     try {
        const newTravel = await Travel.create({
-        //date:date,
+        date:date,
         from:from,
         to:to,
         car:car,
-        //bags:bags,
-        //seatsCar:seatsCar,
-        //price:price
+        bags:bags,
+        seatsCar:seatsCar,
+        price:price,
         owner:req.payload._id,
-         // navigator:navigator
        }) 
         res.json(newTravel)
     } catch (error) {
@@ -77,7 +76,6 @@ router.patch('/:idTravel',isVerified, async (req,res,next)=>{
             bags:bags,
             seatsCar:seatsCar,
             price:price
-        //falta  navigator
         })
         res.json('probando')
     } catch (error) {

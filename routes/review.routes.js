@@ -1,15 +1,18 @@
 const router = require("express").Router();
 const isVerified = require("../middlewares/isVerified.js");
 const Review = require('../models/Review.model.js')
+
+
 //POST '/review'create comment in '/profile'
-router.post('/', isVerified,async (req,res,next)=>{
-    try {
+router.post('/:idtravel', isVerified,async (req,res,next)=>{
+    
+  try {
+      const {idtravel} = req.params
       const {text}=req.body
-      // id travel
       const newReview = await Review.create({
         owner:req.payload._id ,
         text:text ,
-       // travel:travel
+        travel:idtravel
       })
     res.json(newReview)    
     } catch (error) {
