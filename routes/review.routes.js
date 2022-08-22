@@ -3,7 +3,7 @@ const isVerified = require("../middlewares/isVerified.js");
 const Review = require('../models/Review.model.js')
 
 
-//POST '/review'create comment in '/profile'
+//POST '/review/:idtravel'create comment in '/profile'
 router.post('/:idtravel', isVerified,async (req,res,next)=>{
     
   try {

@@ -6,7 +6,7 @@ const isVerified = require('../middlewares/isVerified')
 //GET '/api/travels' => enviar todos los viajes
 router.get('/', async (req,res,next)=>{
     try {  
-        const allTravels = await Travel.find().select('title')
+        const allTravels = await Travel.find()
         res.json(allTravels) 
     } catch (error) {
         next(error)     
