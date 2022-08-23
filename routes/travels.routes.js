@@ -53,9 +53,9 @@ router.post('/create' ,isVerified,async(req,res,next)=>{
 
 //GET  '/api/travels/:idTravel' => enviar los detalles de un viaje
 router.get('/:idTravel',async (req,res,next)=>{
-    const{id}=req.params
+    const{idTravel}=req.params
     try {
-        const singleTravel = await Travel.findById(id)
+        const singleTravel = await Travel.findById(idTravel)
         res.json(singleTravel)
     } catch (error) {
         next(error)
