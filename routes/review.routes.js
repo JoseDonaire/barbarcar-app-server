@@ -4,11 +4,11 @@ const Review = require('../models/Review.model.js')
 
 
 //POST '/review/:idtravel'create comment in '/profile'
-router.post('/:idtravel', isVerified,async (req,res,next)=>{
-    
+router.post('/:idTravel', isVerified,async (req,res,next)=>{
+  const {idtravel} = req.params
+  const {text}=req.body
   try {
-      const {idtravel} = req.params
-      const {text}=req.body
+      
       const newReview = await Review.create({
         owner:req.payload._id ,
         text:text ,
@@ -22,8 +22,10 @@ router.post('/:idtravel', isVerified,async (req,res,next)=>{
 
 //GET '/review/driver' =>  recibir info reseña del driver concreto
 router.get('/driver', isVerified, async(req,res,next)=>{
-    try {
-      const driverReview = await Review.find({owner:req.payload._id})
+  const  userid = req.payload._id
+  
+  try {
+      const driverReview = await Review.find({owner:userid})
       res.json(driverReview)  
     } catch (error) {
       next(error)      

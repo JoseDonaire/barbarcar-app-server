@@ -4,7 +4,7 @@ const {Schema,model}=require ('mongoose');
 const travelSchema= new Schema(
     {
         date:{
-            type: Date,
+            type:  Date,
             //required:true
         },
         from:{

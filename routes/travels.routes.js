@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Travel = require('../models/Travel.model')
 
 const isVerified = require('../middlewares/isVerified')
+//const {isOwner} = require('../middlewares/isOwner');
 
 //GET '/api/travels' => enviar todos los viajes
 router.get('/', async (req,res,next)=>{
@@ -25,9 +26,11 @@ router.get('/mytravels',isVerified, async(req,res,next)=>{
     }
 })
 
+
+
 //POST '/api/travels/create' => recibir y crear un nuevo viaje
 router.post('/create' ,isVerified,async(req,res,next)=>{
-    const{date,from,to,car,bags,seatsCar,price,navigator}=req.body
+    const{date,from,to,car,bags,seatsCar,price}=req.body
   //  if(!date ||!from ||!tocar ||!bags ||!seatsCar ||!price) {
   //      res.json({errorMessage: '¡Nos falta información sobre tu viaje!'})
   //  }
@@ -62,8 +65,22 @@ router.get('/:idTravel',async (req,res,next)=>{
     }
 })
 
+// PATH '/api/travels/:idTravel/navigator
+router.patch('/:idTravel/navigator', isVerified, async (req,res,next)=>{
+    const{idTravel}=req.params
+    const userId = req.payload._id
+    try {
+        const updateNavigators = await  Travel.findByIdAndUpdate(idTravel, {
+            $addToSet : {navigator:userId}
+        })
+        res.json(updateNavigators)
+    } catch (error) {
+        next (error)
+    }
+})
 
-//PATCH '/api/travels/:idTravel' ==> modificar los asientos libres
+
+//PATCH '/api/travels/:idTravel' ==> edit
 router.patch('/:idTravel',isVerified, async (req,res,next)=>{
     const{idTravel}=req.params
     const{date,from,to,car,bags,seatsCar,price}=req.body
@@ -84,7 +101,7 @@ router.patch('/:idTravel',isVerified, async (req,res,next)=>{
 })
 
 //DELETE '/api/travels/:idTravel' => eliminar viaje
-router.delete('/:idTravel',isVerified, async (req,res,next)=>{
+router.delete('/:idTravel',isVerified , async (req,res,next)=>{
     const{idTravel}=req.params
     try {
         await Travel.findByIdAndDelete(idTravel)
