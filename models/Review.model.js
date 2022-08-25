@@ -8,9 +8,9 @@ const reviewSchema = new Schema({
     type: String,
     required: true,
   },
-  travel: {
+  user: {
     type: Schema.Types.ObjectId,
-    ref: "Travel",
+    ref: "User",
   },
 });
 
