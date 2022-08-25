@@ -5,7 +5,7 @@ const travelSchema= new Schema(
     {
         date:{
             type:  String,
-            //required:true
+            
         },
         from:{
             type:String,
@@ -21,15 +21,15 @@ const travelSchema= new Schema(
         },
         bags:{
             type:Number,
-            //required:true
+            
         },
         seatsCar:{
             type:Number,
-           // required:true
+           
         },
         price:{
             type:Number,
-           // required:true
+           
         },
         owner:{
             type:Schema.Types.ObjectId,
