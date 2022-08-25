@@ -58,7 +58,7 @@ router.post('/create' ,isVerified,async(req,res,next)=>{
 router.get('/:idTravel',async (req,res,next)=>{
     const{idTravel}=req.params
     try {
-        const singleTravel = await Travel.findById(idTravel)
+        const singleTravel = await Travel.findById(idTravel).populate('owner').populate("navigator")
         res.json(singleTravel)
     } catch (error) {
         next(error)
@@ -72,7 +72,7 @@ router.patch('/:idTravel/navigator', isVerified, async (req,res,next)=>{
     try {
         const updateNavigators = await  Travel.findByIdAndUpdate(idTravel, {
             $addToSet : {navigator:userId}
-        })
+        }).populate('navigator')
         res.json(updateNavigators)
     } catch (error) {
         next (error)
