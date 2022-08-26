@@ -6,24 +6,22 @@ const userSchema = new Schema(
     username: {
       type: String,
       unique: true,
-      required:true
+      required: true,
     },
-    email:{
-      type:String,
-      unique:true,
-      required:true
-    },
-    password:{
+    email: {
       type: String,
-      required:true
+      unique: true,
+      required: true,
     },
-    role:{
-      type:String,
-      enum: ['driver','navigator'],
-      default: 'navigator'
-
-    }
-
+    password: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["driver", "navigator"],
+      default: "navigator",
+    },
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
@@ -34,4 +32,3 @@ const userSchema = new Schema(
 const User = model("User", userSchema);
 
 module.exports = User;
-
