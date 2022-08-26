@@ -1,21 +1,17 @@
-# Tu Noticia 
-
-## Descripción
-
-## Estructura creo que esto fuera
-
+## Description
+ -Are you tired of the increase in the price of gasoline? Share the expenses of your trips thanks to BarBarCar.
 
 # User Stories
-    - Signup:
-    - Login:
-    - Profile:
-    - Profile Driver:
-    - Add Travel:
-    - Travel Details
-    - Travel Edit:
-    - Home:
-    - 404: 
-    - NotFound:
+    - Signup: Signup form, link to login, navigate to homepage after login.
+    - Login: Login form, link to signup, navigate to homepage after login.
+    - Profile: Check profile with stat information.
+    - Profile Driver: Check profile driver with see drivers Reviews.
+    - Add Travel: Add a travel to u profile.
+    - Travel Details: Show travel details. 
+    - Travel Edit: Edit u travels.
+    - Home: Home page.
+    - 404: Error
+    - NotFound: Not Found
 
 # Backlog ??
 
